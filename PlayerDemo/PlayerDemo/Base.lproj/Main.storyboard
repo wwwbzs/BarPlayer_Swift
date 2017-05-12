@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="PlayerDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bT4-SK-nHf">
+                                <rect key="frame" x="133" y="439" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="cacleAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qNz-9X-9QM"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rqL-sZ-06l">
+                                <rect key="frame" x="82" y="510" width="240" height="128"/>
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fPL-q7-hv4">
+                                        <rect key="frame" x="103" y="49" width="97" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="fPL-q7-hv4" secondAttribute="trailing" constant="40" id="5U1-A6-Zus"/>
+                                    <constraint firstItem="fPL-q7-hv4" firstAttribute="leading" secondItem="rqL-sZ-06l" secondAttribute="leading" constant="103" id="FO9-uv-EMI"/>
+                                    <constraint firstAttribute="bottom" secondItem="fPL-q7-hv4" secondAttribute="bottom" constant="49" id="I5U-yU-fms"/>
+                                    <constraint firstItem="fPL-q7-hv4" firstAttribute="top" secondItem="rqL-sZ-06l" secondAttribute="top" constant="49" id="qOj-TB-5EW"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="rqL-sZ-06l" secondAttribute="bottom" constant="29" id="3Na-T1-pgD"/>
+                            <constraint firstItem="rqL-sZ-06l" firstAttribute="top" secondItem="bT4-SK-nHf" secondAttribute="bottom" constant="41" id="7H5-5U-9Ey"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="rqL-sZ-06l" secondAttribute="trailing" constant="37" id="djp-nT-Yre"/>
+                            <constraint firstItem="rqL-sZ-06l" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="66" id="lgN-lN-KfB"/>
+                            <constraint firstItem="bT4-SK-nHf" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="133" id="muW-Ky-4bZ"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="caclePlay" destination="bT4-SK-nHf" id="FGa-A6-QE4"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+    </scenes>
+</document>
