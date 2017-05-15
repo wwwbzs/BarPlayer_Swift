@@ -67,7 +67,7 @@ class PlayerView: UIView {
         weak var weakSelf = self
         self.player.timeObserBlock = {
             (currentTime,totalTime,value) in
-            (weakSelf?.controlView as! PlayerControlView).play(currentTime: currentTime, totalTime: totalTime, value)
+            weakSelf?.controlView?.play(currentTime: currentTime, totalTime: totalTime, value)
         }
     }
     
@@ -80,11 +80,17 @@ class PlayerView: UIView {
     }
     
     func pause() {
-        (self.controlView as! PlayerControlView).play(btnState: false)
+        self.controlView?.play(btnState: false)
         self.player.pause()
         self.isPlaying = false
     }
+    
+    
+    /// 控制播放基类
     class View:UIView{
+        
+        
+        /// 播放事件触发代理
         weak var delegate:PlayActionDelegate?{
             get{
                 return objc_getAssociatedObject(self, RuntimeKey.delegateKey) as? PlayActionDelegate
@@ -94,9 +100,13 @@ class PlayerView: UIView {
             }
         }
         
+        /// 播放按钮状态改变
+        ///
+        /// - Parameter btnState: 播放状态
         dynamic func play(btnState:Bool) {
             print("😄播放按钮改变")
         }
+        
         /// 正常播放时间
         ///
         /// - Parameters:
@@ -106,6 +116,33 @@ class PlayerView: UIView {
         dynamic func play(currentTime:NSInteger,totalTime:NSInteger,_ sliderValue:CGFloat) {
             print("😄哈哈哈啊哈哈")
         }
+        
+        /// 重置ControlView
+        dynamic func playerResetControlView(){
+            
+        }
+        
+        /// 控制View的显示或隐藏
+        dynamic func playerControlViewShowOrHide() {
+            
+        }
+        
+        /// 显示
+        dynamic func playerShowControlView() {
+            
+        }
+        
+        /// 隐藏
+        dynamic func playerHideControlView() {
+
+        }
+        
+        /// 自动隐藏
+        dynamic func playerControlViewCancelAutoFadeOut() {
+            print("😄自动隐藏")
+        }
+        
+        /// 约束
         dynamic func makeSubViewsConstraints(){
             
         }

@@ -89,11 +89,11 @@ class BARCutPopView: UIView {
     
     
     
-    func color() -> UIColor {
+    func color() -> UIColor? {
         return UIColor(cgColor: (_pathLayer?.presentation()?.fillColor)!)
     }
-    func setColor(_ color:UIColor) {
-        _pathLayer?.fillColor = color.cgColor
+    func setColor(_ color:UIColor?) {
+        _pathLayer?.fillColor = color?.cgColor
         _colorAnimLayer?.removeAnimation(forKey: SliderFillColorAnim)
     }
     func opaqueColor() -> UIColor? {

@@ -11,9 +11,45 @@ import Foundation
 
 class PlayerSlider: UISlider {
     
-    var popUpViewColor:UIColor?
+    var popUpViewColor:UIColor?{
+        get{
+            return self.popUpView?.color() != nil ?nil:_popUpViewColor
+        }
+        set{
+            _popUpViewColor = newValue
+            popUpViewAnimatedColors = nil
+            self.popUpView?.setColor(newValue)
+            if autoAdjustTrackColor != nil {
+                super.minimumTrackTintColor = self.popUpView?.opaqueColor()
+            }
+        }
+    }
+    fileprivate var _popUpViewColor:UIColor?
     
-    var popUpViewAnimatedColors:Array<UIColor>?
+    
+    var popUpViewAnimatedColors:Array<UIColor>?{
+        get{
+            return _popUpViewAnimatedColors
+        }
+        set{
+            
+            self.setPopUpViewAnimatedColors(newValue, withPositions: nil)
+        }
+    }
+    func setPopUpViewAnimatedColors(_ colors:Array<UIColor>?,withPositions:Array<Any>?) {
+        if withPositions != nil {
+            assert(colors?.count == withPositions?.count, "popUpViewAnimatedColors and locations should contain the same number of items")
+        }
+        _popUpViewAnimatedColors = colors
+        
+        if colors!.count >= 2 {
+//            self.popUpView.anm
+        }
+    }
+    
+    
+    fileprivate var _popUpViewAnimatedColors:Array<UIColor>?
+    
     var popUpViewCornerRadius = 4.0
     var popUpViewArrowLength = 13.0
     var popUpViewWidthPaddingFactor = 1.15
@@ -32,7 +68,19 @@ class PlayerSlider: UISlider {
         self._popUpView = popUpView
     }
     
-    var autoAdjustTrackColor:Bool?
+    var autoAdjustTrackColor:Bool?{
+        willSet{
+            if autoAdjustTrackColor == newValue {
+                return
+            }
+            if newValue == false {
+                super.minimumTrackTintColor = nil
+            } else {
+                super.minimumTrackTintColor = self.popUpView?.opaqueColor()
+            }
+            
+        }
+    }
     weak var delegate:PlayerSliderDelegate?
     
     fileprivate var popUpViewAlwaysOn:Bool = false
@@ -56,21 +104,21 @@ class PlayerSlider: UISlider {
         
     }
     
-    func set(image:UIImage) {
-        
-    }
+//    func set(image:UIImage) {
+//        
+//    }
+//    
+//    func set(text:String) {
+//        
+//    }
     
-    func set(text:String) {
-        
-    }
-    
-    func set(popUpViewAnimatedColors colors:Array<UIColor>,with positions:Array<Any>?) {
-        if positions != nil {
-            assert(colors.count == positions?.count, "popUpViewAnimatedColors and locations should contain the same number of items")
-        }
-        popUpViewAnimatedColors = colors
-        
-    }
+//    func set(popUpViewAnimatedColors colors:Array<UIColor>,with positions:Array<Any>?) {
+//        if positions != nil {
+//            assert(colors.count == positions?.count, "popUpViewAnimatedColors and locations should contain the same number of items")
+//        }
+//        popUpViewAnimatedColors = colors
+//        
+//    }
 
 }
 
@@ -95,8 +143,17 @@ extension PlayerSlider{
     func hidePopUpView(animated:Bool) {
         
     }
+    
+    func setText(_ text:String) {
+        self.popUpView?.setText(text)
+    }
+    
+    func setImage(_ image:UIImage) {
+        self.popUpView?.setImage(image)
+    }
 }
 
+/// PlayerSliderDelegate
 protocol  PlayerSliderDelegate:NSObjectProtocol{
     
 }

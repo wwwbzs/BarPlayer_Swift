@@ -46,13 +46,18 @@ class PlayerControlView: PlayerView.View {
     lazy fileprivate var lockBtn:UIButton = {
         let lockBtn = UIButton(type: UIButtonType.custom)
         lockBtn.setImage(BARImage(file: "ZFPlayer_unlock-nor"), for: UIControlState.normal)
-        lockBtn.setImage(BARImage(file: "ZFPlayer_lock-no"), for: UIControlState.selected)
+        lockBtn.setImage(BARImage(file: "ZFPlayer_lock-nor"), for: UIControlState.selected)
         lockBtn.addTarget(self, action: #selector(lockScreenBtnClick(_:)), for: UIControlEvents.touchUpInside)
         return lockBtn
     }()
     func lockScreenBtnClick(_ sender:Any) {
-        
+        self.lockBtn.isSelected = !self.lockBtn.isSelected
+        self.isShowing = false
+        self.delegate?.lockScreenAction?(sender as! UIButton)
     }
+    
+    var isShowing:Bool?
+    
     
 //    fileprivate var backBtn:UIButton
     
@@ -82,7 +87,7 @@ class PlayerControlView: PlayerView.View {
     lazy fileprivate var bottomImageView:BottomImageView = {
         let bottomImageView = BottomImageView()
         bottomImageView.isUserInteractionEnabled = true
-//        bottomImageView.alpha = 0
+        bottomImageView.alpha = 0
         bottomImageView.image = BARImage(file: "ZFPlayer_bottom_shadow")
         return bottomImageView
     }()
@@ -91,7 +96,7 @@ class PlayerControlView: PlayerView.View {
     lazy fileprivate var topImageView:TopImageView = {
         let topImageView = TopImageView()
         topImageView.isUserInteractionEnabled = true
-//        topImageView.alpha = 0
+        topImageView.alpha = 0
         topImageView.image = BARImage(file: "ZFPlayer_top_shadow")
         return topImageView
     }()
@@ -233,7 +238,11 @@ class PlayerControlView: PlayerView.View {
 extension PlayerControlView{
     
     override func play(btnState:Bool) {
-        self.bottomImageView.startBtn.isSelected = !self.bottomImageView.startBtn.isSelected
+        self.bottomImageView.startBtn.isSelected = btnState
+    }
+    
+    override func playerResetControlView(){
+    
     }
     
     override func play(currentTime: NSInteger, totalTime: NSInteger, _ sliderValue: CGFloat) {
@@ -299,7 +308,7 @@ extension PlayerControlView:PlayActionDelegate{
     @objc optional func fullscreenAction()
     
     /// 锁定按钮点击事件
-    @objc optional func lockScreenAction()
+    @objc optional func lockScreenAction(_ sender:UIButton)
     
     /// 重播按钮点击事件
     @objc optional func repeatPlayAction()
@@ -385,6 +394,10 @@ private class TopImageView:UIImageView{
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    fileprivate func playerResetControlView(){
+        
     }
     
     fileprivate  func makeSubViewsConstraints() {
